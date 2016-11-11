@@ -1,10 +1,11 @@
 package dao;
 
-import mysql.User;
+import model.User;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -14,6 +15,8 @@ import java.util.List;
  */
 @Repository
 public class PersonDAOImpl implements PersonDAO {
+
+    @Autowired
     private SessionFactory sessionFactory;
 
     public void setSessionFactory(SessionFactory sessionFactory) {
@@ -76,7 +79,6 @@ public class PersonDAOImpl implements PersonDAO {
         return p;
     }
 
-    @Override
     public List<User> findByName(String name, Long page, int personsOnPage) {
         Session session = sessionFactory.openSession();
         @SuppressWarnings("unchecked")
@@ -89,7 +91,6 @@ public class PersonDAOImpl implements PersonDAO {
         return l;
     }
 
-    @Override
     public int getPersonsCount() {
         Session session = sessionFactory.openSession();
         Query q = session.createQuery("FROM User");
@@ -98,7 +99,6 @@ public class PersonDAOImpl implements PersonDAO {
         return count;
     }
 
-    @Override
     public int getPersonsCount(String name) {
         Session session = sessionFactory.openSession();
         Query q = session.createQuery("FROM User WHERE name = :name");

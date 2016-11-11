@@ -1,49 +1,54 @@
-package mysql;
+package model;
+
 
 import javax.persistence.*;
-import java.sql.Timestamp;
+import java.util.Date;
 
 /**
  * Created by Artem on 12.05.2016.
  */
 @Entity
+@Table(name = "users")
 public class User {
+
     @Id
     @Column(name = "id")
-    @GeneratedValue
-    private int id;
+    @SequenceGenerator(name = "global_seq", sequenceName = "global_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "global_seq")
+    private Integer id;
+
+    @Column(name = "name", nullable = false)
     private String name;
-    private int age;
-    @Basic
-    @Column(name = "isAdmin", nullable = false)
+
+    @Column(name = "age")
+    private Integer age;
+
+    @Column(name = "is_admin", nullable = false)
     private boolean admin;
 
-
-    private Timestamp createDate;
+    @Column(name = "create_date", columnDefinition = "timestamp default now()")
+    private Date createDate = new Date();
 
 
     public User() {
     }
 
-    public User(String name, int age, boolean admin, Timestamp createDate) {
+    public User(String name, int age, boolean admin) {
         this.name = name;
         this.age = age;
         this.admin = admin;
-        this.createDate = createDate;
     }
 
 
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    @Basic
-    @Column(name = "name", nullable = false, length = 25)
     public String getName() {
         return name;
     }
@@ -52,13 +57,11 @@ public class User {
         this.name = name;
     }
 
-    @Basic
-    @Column(name = "age", nullable = false)
-    public int getAge() {
+    public Integer getAge() {
         return age;
     }
 
-    public void setAge(int age) {
+    public void setAge(Integer age) {
         this.age = age;
     }
 
@@ -71,13 +74,11 @@ public class User {
         this.admin = admin;
     }
 
-    @Basic
-    @Column(name = "createDate", nullable = false)
-    public Timestamp getCreateDate() {
+    public Date getCreateDate() {
         return createDate;
     }
 
-    public void setCreateDate(Timestamp createDate) {
+    public void setCreateDate(Date createDate) {
         this.createDate = createDate;
     }
 

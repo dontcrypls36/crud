@@ -1,6 +1,6 @@
 package dao;
 
-import mysql.User;
+import model.User;
 
 import java.util.List;
 
