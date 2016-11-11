@@ -1,34 +1,54 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component name="dataSourceStorage">
-  <data-source name="MySQL - test@localhost" uuid="7c4dd9ad-05b3-42d5-bf92-e4ba5fbd103e">
-    <database-info product="MySQL" version="5.5.5-10.1.8-MariaDB" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.35 ( Revision: 5fb9c5849535c13917c2cf9baaece6ef9693ef27 )">
-      <extra-name-characters>#@</extra-name-characters>
-      <identifier-quote-string>`</identifier-quote-string>
+  <data-source name="PostgreSQL - crud@localhost" uuid="d135c739-e957-4365-a2be-fcdc0c0abd07">
+    <database-info product="PostgreSQL" version="9.5.3" jdbc-version="4.0" driver-name="PostgreSQL Native Driver" driver-version="PostgreSQL 9.4 JDBC4 (build 1201)">
+      <identifier-quote-string>&quot;</identifier-quote-string>
     </database-info>
-    <case-sensitivity plain-identifiers="lower" quoted-identifiers="lower"/>
-    <database-model serializer="dbm" rdbms="MYSQL" format-version="2.2">
-      <schema id="1" name="test"/>
-      <table id="2" parent="1" name="user"/>
-      <column id="3" parent="2" name="id">
+    <case-sensitivity plain-identifiers="lower" quoted-identifiers="exact"/>
+    <database-model serializer="dbm" rdbms="POSTGRES" format-version="2.2">
+      <database id="1" name="crud"/>
+      <schema id="2" parent="1" name="public">
+        <object-id>2200</object-id>
+        <comment>standard public schema</comment>
+        <introspection-state-number>3952</introspection-state-number>
+        <introspection-timestamp>2016-11-05.13:28:17.019</introspection-timestamp>
+      </schema>
+      <table id="3" parent="2" name="users">
+        <object-id>24566</object-id>
+        <state-number>3952</state-number>
+      </table>
+      <column id="4" parent="3" name="id">
+        <state-number>3952</state-number>
         <mandatory>1</mandatory>
-        <data-type>int(8)</data-type>
+        <data-type>integer</data-type>
       </column>
-      <column id="4" parent="2" name="name">
-        <data-type>varchar(25)</data-type>
-      </column>
-      <column id="5" parent="2" name="age">
-        <data-type>int(3)</data-type>
-      </column>
-      <column id="6" parent="2" name="isAdmin">
-        <data-type>bit(1)</data-type>
-      </column>
-      <column id="7" parent="2" name="createDate">
+      <column id="5" parent="3" name="name">
+        <state-number>3952</state-number>
         <mandatory>1</mandatory>
+        <data-type>varchar(255)</data-type>
+      </column>
+      <column id="6" parent="3" name="age">
+        <state-number>3952</state-number>
+        <data-type>integer</data-type>
+      </column>
+      <column id="7" parent="3" name="is_admin">
+        <state-number>3952</state-number>
+        <mandatory>1</mandatory>
+        <data-type>bit</data-type>
+      </column>
+      <column id="8" parent="3" name="create_date">
+        <state-number>3952</state-number>
         <data-type>timestamp</data-type>
-        <default-expression>&apos;CURRENT_TIMESTAMP&apos;</default-expression>
+        <default-expression>now()</default-expression>
       </column>
-      <key id="8" parent="2" name="PRIMARY">
+      <index id="9" parent="3" name="users_pkey">
+        <object-id>24570</object-id>
         <columns>id</columns>
+        <unique>1</unique>
+      </index>
+      <key id="10" parent="3" name="users_pkey">
+        <columns>id</columns>
+        <underlying-index>users_pkey</underlying-index>
         <primary>1</primary>
       </key>
     </database-model>
