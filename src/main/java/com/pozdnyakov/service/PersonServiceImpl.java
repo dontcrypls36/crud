@@ -1,7 +1,9 @@
-package dao;
+package com.pozdnyakov.service;
 
 
-import model.User;
+import com.pozdnyakov.dao.PersonDAO;
+import com.pozdnyakov.model.User;
+import com.pozdnyakov.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

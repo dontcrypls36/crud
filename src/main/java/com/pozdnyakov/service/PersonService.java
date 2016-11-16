@@ -1,6 +1,6 @@
-package dao;
+package com.pozdnyakov.service;
 
-import model.User;
+import com.pozdnyakov.model.User;
 
 import java.util.List;
 

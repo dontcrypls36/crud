@@ -4,8 +4,8 @@
     <facet type="hibernate" name="Hibernate">
       <configuration>
         <datasource-map>
-          <unit-entry name="hibernate.cfg.xml" value="7c4dd9ad-05b3-42d5-bf92-e4ba5fbd103e" />
-          <unit-entry name="hibernate4LocalSessionFactory" value="dataSource" />
+          <unit-entry name="hibernate.cfg.xml" value="d135c739-e957-4365-a2be-fcdc0c0abd07" />
+          <unit-entry name="hibernate4LocalSessionFactory" value="d135c739-e957-4365-a2be-fcdc0c0abd07" />
         </datasource-map>
         <naming-strategy-map />
         <deploymentDescriptor name="hibernate.cfg.xml" url="file://$MODULE_DIR$/src/main/resources/hibernate.cfg.xml" />
@@ -36,9 +36,6 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="Hibernate 4.2.2-4.2.2" level="project" />
-    <orderEntry type="library" exported="" name="Spring-4.2.4.RELEASE" level="project" />
-    <orderEntry type="library" exported="" name="Spring MVC-4.2.4.RELEASE" level="project" />
     <orderEntry type="module-library">
       <library>
         <CLASSES>
@@ -60,7 +57,6 @@
         <jarDirectory url="file://C:/Program Files/Apache Software Foundation/commons-pool2-2.4.2" recursive="false" />
       </library>
     </orderEntry>
-    <orderEntry type="library" name="angular.min.js" level="project" />
     <orderEntry type="module-library">
       <library>
         <CLASSES>

@@ -1,11 +1,15 @@
-package controller;
+package com.pozdnyakov.controller;
 
-import dao.PersonService;
-import model.User;
+import com.pozdnyakov.model.Role;
+import com.pozdnyakov.model.User;
+import com.pozdnyakov.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Arrays;
+import java.util.List;
 
 @Controller
 public class PersonController{
@@ -26,10 +30,10 @@ public class PersonController{
 //        int startpage = (int) (page - 3 > 0?page - 3:1);
 //        int pagesCount = (personsCount % PERSONS_ON_PAGE == 0) ?  personsCount / PERSONS_ON_PAGE : personsCount / PERSONS_ON_PAGE + 1;
 //        int endpage = (startpage + 6) > pagesCount ? pagesCount : startpage + 6;
-       // model.addAttribute("person", new User());
+       // com.pozdnyakov.model.addAttribute("person", new User());
         model.addAttribute("usersList", this.personService.read(1L, PERSONS_ON_PAGE));
-//        model.addAttribute("startpage", startpage);
-//        model.addAttribute("endpage", endpage);
+//        com.pozdnyakov.model.addAttribute("startpage", startpage);
+//        com.pozdnyakov.model.addAttribute("endpage", endpage);
         return "personsList";
     }
 
@@ -105,6 +109,8 @@ public class PersonController{
     @RequestMapping(value = "/addperson")
     public String addPerson(Model model){
         model.addAttribute("person", new User());
+        List<Role> rolesList = Arrays.asList(Role.values());
+        model.addAttribute("rolesList", rolesList);
         return "personAdd";
     }
 

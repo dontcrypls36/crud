@@ -126,6 +126,6 @@
         </dependency>
     </dependencies>
     <build>
-        <finalName>ERPSystem</finalName>
+        <finalName>CRUD</finalName>
     </build>
 </project>

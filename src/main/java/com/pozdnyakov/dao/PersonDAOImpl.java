@@ -1,6 +1,6 @@
-package dao;
+package com.pozdnyakov.dao;
 
-import model.User;
+import com.pozdnyakov.model.User;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -56,7 +56,9 @@ public class PersonDAOImpl implements PersonDAO {
         User em = (User) session.get(User.class, e.getId());
         em.setName(e.getName());
         em.setAge(e.getAge());
-        em.setAdmin(e.isAdmin());
+        em.setLogin(e.getLogin());
+        em.setPassword(e.getPassword());
+        em.setRoles(e.getRoles());
         em.setCreateDate(e.getCreateDate());
         session.getTransaction().commit();
         session.close();

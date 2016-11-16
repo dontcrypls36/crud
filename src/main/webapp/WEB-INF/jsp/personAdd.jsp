@@ -27,8 +27,16 @@
             <td><form:input path="age"/></td>
         </tr>
         <tr>
-            <td><label path="admin">Admin:</label></td>
-            <td><form:checkbox path="admin" /></td>
+            <td><label path="login">Login:</label></td>
+            <td><form:input path="login" /></td>
+        </tr>
+        <tr>
+            <td><label path="password">Password:</label></td>
+            <td><form:input path="password" /></td>
+        </tr>
+        <tr>
+            <td><label path="roles">Roles:</label></td>
+            <td><form:checkboxes path="roles" items="${rolesList}" multiple="true"/></td>
         </tr>
 
         <tr>

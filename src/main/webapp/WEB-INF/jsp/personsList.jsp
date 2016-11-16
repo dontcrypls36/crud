@@ -34,8 +34,9 @@
         <th width="80">User ID</th>
         <th width="120">User Name</th>
         <th width="20">Age</th>
-        <th width="30">Admin</th>
         <th width="120">Create date</th>
+        <th width="120">Login</th>
+        <th width="120">Roles</th>
         <th width="60">Edit</th>
         <th width="60">Delete</th>
     </tr>
@@ -44,8 +45,9 @@
             <td>${user.id}</td>
             <td>${user.name}</td>
             <td>${user.age}</td>
-            <td>${user.admin}</td>
             <td>${user.createDate}</td>
+            <td>${user.login}</td>
+            <td>${user.roles}</td>
             <td><a href="<c:url value='/edit/${user.id}' />" >Edit</a></td>
             <td><a href="<c:url value='/remove/${user.id}' />" >Delete</a></td>
         </tr>
