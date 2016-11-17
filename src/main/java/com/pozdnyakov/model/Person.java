@@ -9,7 +9,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "users")
-public class User {
+public class Person {
 
     @Id
     @Column(name = "id")
@@ -62,10 +62,10 @@ public class User {
         this.roles = roles;
     }
 
-    public User() {
+    public Person() {
     }
 
-    public User(String name, int age, String login, String password, Set<Role> roles) {
+    public Person(String name, int age, String login, String password, Set<Role> roles) {
         this.name = name;
         this.age = age;
         this.login = login;
@@ -110,15 +110,15 @@ public class User {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        User user = (User) o;
+        Person person = (Person) o;
 
-        if (!id.equals(user.id)) return false;
-        if (!name.equals(user.name)) return false;
-        if (age != null ? !age.equals(user.age) : user.age != null) return false;
-        if (!createDate.equals(user.createDate)) return false;
-        if (!login.equals(user.login)) return false;
-        if (!password.equals(user.password)) return false;
-        return roles.equals(user.roles);
+        if (!id.equals(person.id)) return false;
+        if (!name.equals(person.name)) return false;
+        if (age != null ? !age.equals(person.age) : person.age != null) return false;
+        if (!createDate.equals(person.createDate)) return false;
+        if (!login.equals(person.login)) return false;
+        if (!password.equals(person.password)) return false;
+        return roles.equals(person.roles);
 
     }
 

@@ -40,16 +40,19 @@
         <th width="60">Edit</th>
         <th width="60">Delete</th>
     </tr>
-    <c:forEach var="user" items="${usersList}">
+    <c:forEach var="person" items="${usersList}">
         <tr>
-            <td>${user.id}</td>
-            <td>${user.name}</td>
-            <td>${user.age}</td>
-            <td>${user.createDate}</td>
-            <td>${user.login}</td>
-            <td>${user.roles}</td>
-            <td><a href="<c:url value='/edit/${user.id}' />" >Edit</a></td>
-            <td><a href="<c:url value='/remove/${user.id}' />" >Delete</a></td>
+            <td>${person.id}</td>
+            <td>${person.name}</td>
+            <td>${person.age}</td>
+            <td>${person.createDate}</td>
+            <td>${person.login}</td>
+            <td><c:forEach var="role" items="${person.roles}">
+                ${role},
+            </c:forEach>
+            </td>
+            <td><a href="<c:url value='/edit/${person.id}' />" >Edit</a></td>
+            <td><a href="<c:url value='/remove/${person.id}' />" >Delete</a></td>
         </tr>
     </c:forEach>
 </table>

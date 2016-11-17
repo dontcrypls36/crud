@@ -1,6 +1,6 @@
 package com.pozdnyakov.dao;
 
-import com.pozdnyakov.model.User;
+import com.pozdnyakov.model.Person;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -23,7 +23,7 @@ public class PersonDAOImpl implements PersonDAO {
         this.sessionFactory = sessionFactory;
     }
 
-    public int create(User p) {
+    public int create(Person p) {
         Session session = sessionFactory.openSession();
         Transaction tr = session.beginTransaction();
         Integer i = (Integer)session.save(p);
@@ -35,7 +35,7 @@ public class PersonDAOImpl implements PersonDAO {
     public void deleteAll() {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
-        Query query = session.createQuery("DELETE FROM User");
+        Query query = session.createQuery("DELETE FROM Person");
         query.executeUpdate();
         session.getTransaction().commit();
         session.close();
@@ -44,16 +44,16 @@ public class PersonDAOImpl implements PersonDAO {
     public void delete(int id) {
         Session session = sessionFactory.openSession();
         Transaction tx = session.beginTransaction();
-        User p = (User) session.load(User.class, id);
+        Person p = (Person) session.load(Person.class, id);
         session.delete(p);
         tx.commit();
         session.close();
     }
 
-    public void update(User e) {
+    public void update(Person e) {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
-        User em = (User) session.get(User.class, e.getId());
+        Person em = (Person) session.get(Person.class, e.getId());
         em.setName(e.getName());
         em.setAge(e.getAge());
         em.setLogin(e.getLogin());
@@ -64,38 +64,38 @@ public class PersonDAOImpl implements PersonDAO {
         session.close();
     }
 
-    public List<User> read(Long page, int personsOnPage) {
+    public List<Person> read(Long page, int personsOnPage) {
         Session session = sessionFactory.openSession();
         @SuppressWarnings("unchecked")
-        Query q = session.createQuery("FROM User");
+        Query q = session.createQuery("FROM Person");
         q.setFirstResult((page.intValue() - 1) * personsOnPage);
         q.setMaxResults( personsOnPage);
-        List<User> l = q.list();
+        List<Person> l = q.list();
         session.close();
         return l;
     }
 
-    public User getPersonById(int id){
+    public Person getPersonById(int id){
         Session session = sessionFactory.getCurrentSession();
-        User p = (User) session.load(User.class, new Integer(id));
+        Person p = (Person) session.load(Person.class, new Integer(id));
         return p;
     }
 
-    public List<User> findByName(String name, Long page, int personsOnPage) {
+    public List<Person> findByName(String name, Long page, int personsOnPage) {
         Session session = sessionFactory.openSession();
         @SuppressWarnings("unchecked")
-        Query q = session.createQuery("FROM User WHERE name = :name");
+        Query q = session.createQuery("FROM Person WHERE name = :name");
         q.setParameter("name", name);
         q.setFirstResult((page.intValue() - 1) *  personsOnPage);
         q.setMaxResults( personsOnPage);
-        List<User> l = q.list();
+        List<Person> l = q.list();
         session.close();
         return l;
     }
 
     public int getPersonsCount() {
         Session session = sessionFactory.openSession();
-        Query q = session.createQuery("FROM User");
+        Query q = session.createQuery("FROM Person");
         int count = q.list().size();
         session.close();
         return count;
@@ -103,10 +103,18 @@ public class PersonDAOImpl implements PersonDAO {
 
     public int getPersonsCount(String name) {
         Session session = sessionFactory.openSession();
-        Query q = session.createQuery("FROM User WHERE name = :name");
+        Query q = session.createQuery("FROM Person WHERE name = :name");
         q.setParameter("name", name);
         int count = q.list().size();
         session.close();
         return count;
+    }
+
+    public Person findByLogin(String name) {
+        Session session = sessionFactory.openSession();
+        Query q = session.createQuery("FROM Person WHERE login = :login");
+        q.setParameter("login", name);
+        Person u = (Person)q.list().get(0);
+        return u;
     }
 }

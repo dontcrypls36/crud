@@ -5,7 +5,7 @@
 <hibernate-configuration>
   <session-factory>
     <property name="dialect">org.hibernate.dialect.PostgreSQL9Dialect</property>
-    <mapping class="com.pozdnyakov.model.User"/>
+    <mapping class="com.pozdnyakov.model.Person"/>
   </session-factory>
 
 </hibernate-configuration>

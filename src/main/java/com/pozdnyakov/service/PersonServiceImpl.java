@@ -2,8 +2,7 @@ package com.pozdnyakov.service;
 
 
 import com.pozdnyakov.dao.PersonDAO;
-import com.pozdnyakov.model.User;
-import com.pozdnyakov.service.PersonService;
+import com.pozdnyakov.model.Person;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,17 +19,17 @@ public class PersonServiceImpl implements PersonService {
             this.personDAO = p;
         }
         @Transactional
-        public void create(User p) {
+        public void create(Person p) {
             personDAO.create(p);
         }
         @Transactional
-        public List<User> read(Long page, int personsOnPage) {
+        public List<Person> read(Long page, int personsOnPage) {
             return personDAO.read(page, personsOnPage);
         }
         @Transactional
-        public List<User> findByName(String name, Long page, int personsOnPage){ return personDAO.findByName(name, page, personsOnPage);}
+        public List<Person> findByName(String name, Long page, int personsOnPage){ return personDAO.findByName(name, page, personsOnPage);}
         @Transactional
-        public void update(User p) {
+        public void update(Person p) {
             personDAO.update(p);
         }
         @Transactional
@@ -43,7 +42,7 @@ public class PersonServiceImpl implements PersonService {
         }
 
         @Transactional
-        public User getPersonById(int id){
+        public Person getPersonById(int id){
             return personDAO.getPersonById(id);
         }
 
@@ -54,4 +53,6 @@ public class PersonServiceImpl implements PersonService {
 
         @Transactional
         public int getPersonsCount(String name) {return personDAO.getPersonsCount(name);}
+
+        public Person findByLogin(String s){return personDAO.findByLogin(s);}
 }

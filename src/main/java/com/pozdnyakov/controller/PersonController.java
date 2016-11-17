@@ -1,7 +1,7 @@
 package com.pozdnyakov.controller;
 
+import com.pozdnyakov.model.Person;
 import com.pozdnyakov.model.Role;
-import com.pozdnyakov.model.User;
 import com.pozdnyakov.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -30,7 +30,7 @@ public class PersonController{
 //        int startpage = (int) (page - 3 > 0?page - 3:1);
 //        int pagesCount = (personsCount % PERSONS_ON_PAGE == 0) ?  personsCount / PERSONS_ON_PAGE : personsCount / PERSONS_ON_PAGE + 1;
 //        int endpage = (startpage + 6) > pagesCount ? pagesCount : startpage + 6;
-       // com.pozdnyakov.model.addAttribute("person", new User());
+       // com.pozdnyakov.model.addAttribute("person", new Person());
         model.addAttribute("usersList", this.personService.read(1L, PERSONS_ON_PAGE));
 //        com.pozdnyakov.model.addAttribute("startpage", startpage);
 //        com.pozdnyakov.model.addAttribute("endpage", endpage);
@@ -42,7 +42,7 @@ public class PersonController{
 
     //For add and update person both
     @RequestMapping(value= "/add", method = RequestMethod.POST)
-    public String create(@ModelAttribute("person") User p){
+    public String create(@ModelAttribute("person") Person p){
         if(p.getId() == null){
             //new person, add it
             this.personService.create(p);
@@ -87,7 +87,7 @@ public class PersonController{
             int startpage = (int) (page - 3 > 0?page - 3:1);
             int pagesCount = (personsCount % PERSONS_ON_PAGE == 0) ?  personsCount / PERSONS_ON_PAGE : personsCount / PERSONS_ON_PAGE + 1;
             int endpage = (startpage + 6) > pagesCount ? pagesCount : startpage + 6;
-            model.addAttribute("person", new User());
+            model.addAttribute("person", new Person());
             model.addAttribute("searchName", name);
             model.addAttribute("usersList", this.personService.findByName(name, page, PERSONS_ON_PAGE));
             model.addAttribute("startpage", startpage);
@@ -108,7 +108,7 @@ public class PersonController{
 
     @RequestMapping(value = "/addperson")
     public String addPerson(Model model){
-        model.addAttribute("person", new User());
+        model.addAttribute("person", new Person());
         List<Role> rolesList = Arrays.asList(Role.values());
         model.addAttribute("rolesList", rolesList);
         return "personAdd";
