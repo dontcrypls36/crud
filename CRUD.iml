@@ -5,7 +5,6 @@
       <configuration>
         <datasource-map>
           <unit-entry name="hibernate.cfg.xml" value="d135c739-e957-4365-a2be-fcdc0c0abd07" />
-          <unit-entry name="hibernate4LocalSessionFactory" value="d135c739-e957-4365-a2be-fcdc0c0abd07" />
         </datasource-map>
         <naming-strategy-map />
         <deploymentDescriptor name="hibernate.cfg.xml" url="file://$MODULE_DIR$/src/main/resources/hibernate.cfg.xml" />
@@ -124,13 +123,22 @@
     </orderEntry>
     <orderEntry type="library" scope="TEST" name="Maven: junit:junit:3.8.1" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.apache.tomcat:tomcat-servlet-api:8.0.33" level="project" />
-    <orderEntry type="library" name="Maven: org.springframework:spring-webmvc:4.2.6.RELEASE" level="project" />
-    <orderEntry type="library" name="Maven: org.springframework:spring-beans:4.2.6.RELEASE" level="project" />
-    <orderEntry type="library" name="Maven: org.springframework:spring-context:4.2.6.RELEASE" level="project" />
-    <orderEntry type="library" name="Maven: org.springframework:spring-core:4.2.6.RELEASE" level="project" />
-    <orderEntry type="library" name="Maven: org.springframework:spring-expression:4.2.6.RELEASE" level="project" />
-    <orderEntry type="library" name="Maven: org.springframework:spring-web:4.2.6.RELEASE" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework:spring-webmvc:4.3.4.RELEASE" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework:spring-aop:4.3.4.RELEASE" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework:spring-beans:4.3.4.RELEASE" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework:spring-context:4.3.4.RELEASE" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework:spring-core:4.3.4.RELEASE" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework:spring-expression:4.3.4.RELEASE" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework:spring-web:4.3.4.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-tx:4.2.4.RELEASE" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework:spring-orm:4.2.4.RELEASE" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework:spring-jdbc:4.2.4.RELEASE" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework.security:spring-security-core:4.2.0.RELEASE" level="project" />
+    <orderEntry type="library" name="Maven: aopalliance:aopalliance:1.0" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework.security:spring-security-web:4.2.0.RELEASE" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework.security:spring-security-config:4.2.0.RELEASE" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework.security:spring-security-taglibs:4.2.0.RELEASE" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework.security:spring-security-acl:4.2.0.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.apache.commons:commons-dbcp2:2.1.1" level="project" />
     <orderEntry type="library" name="Maven: org.apache.commons:commons-pool2:2.4.2" level="project" />
     <orderEntry type="library" name="Maven: commons-logging:commons-logging:1.2" level="project" />
@@ -143,13 +151,6 @@
     <orderEntry type="library" name="Maven: org.javassist:javassist:3.20.0-GA" level="project" />
     <orderEntry type="library" name="Maven: org.apache.geronimo.specs:geronimo-jta_1.1_spec:1.1.1" level="project" />
     <orderEntry type="library" name="Maven: org.hibernate:hibernate-java8:5.1.0.Final" level="project" />
-    <orderEntry type="library" name="Maven: org.springframework:spring-orm:4.2.4.RELEASE" level="project" />
-    <orderEntry type="library" name="Maven: org.springframework:spring-jdbc:4.2.4.RELEASE" level="project" />
-    <orderEntry type="library" name="Maven: org.springframework.security:spring-security-core:4.2.0.RELEASE" level="project" />
-    <orderEntry type="library" name="Maven: aopalliance:aopalliance:1.0" level="project" />
-    <orderEntry type="library" name="Maven: org.springframework:spring-aop:4.3.4.RELEASE" level="project" />
-    <orderEntry type="library" name="Maven: org.springframework.security:spring-security-web:4.2.0.RELEASE" level="project" />
-    <orderEntry type="library" name="Maven: org.springframework.security:spring-security-config:4.2.0.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.hibernate:hibernate-core:4.3.11.Final" level="project" />
     <orderEntry type="library" name="Maven: org.jboss.logging:jboss-logging-annotations:1.2.0.Beta1" level="project" />
     <orderEntry type="library" name="Maven: org.jboss.spec.javax.transaction:jboss-transaction-api_1.2_spec:1.0.0.Final" level="project" />

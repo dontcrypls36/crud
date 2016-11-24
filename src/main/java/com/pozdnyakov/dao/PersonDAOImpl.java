@@ -114,7 +114,6 @@ public class PersonDAOImpl implements PersonDAO {
         Session session = sessionFactory.openSession();
         Query q = session.createQuery("FROM Person WHERE login = :login");
         q.setParameter("login", name);
-        Person u = (Person)q.list().get(0);
-        return u;
+        return (Person)q.list().get(0);
     }
 }

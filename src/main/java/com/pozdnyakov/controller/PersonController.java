@@ -4,10 +4,16 @@ import com.pozdnyakov.model.Person;
 import com.pozdnyakov.model.Role;
 import com.pozdnyakov.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.Arrays;
 import java.util.List;
 
@@ -66,7 +72,7 @@ public class PersonController{
     public String update(@RequestParam(value = "page", required = false) Long page, @PathVariable("id") int id, Model model){
         model.addAttribute("person", this.personService.getPersonById(id));
         model.addAttribute("usersList", this.personService.read(page == null? 1L : page, PERSONS_ON_PAGE));
-        return "index";
+        return "personAdd";
     }
 
     @RequestMapping("/deleteAll")
@@ -101,9 +107,17 @@ public class PersonController{
         return "personsList";
     }
 
-    @RequestMapping(value = "/")
-    public String index() {
-        return "index";
+    @RequestMapping(value = {"/", "/login"})
+    public String login(Model model,
+                        @RequestParam(value = "error", required = false) String error,
+                        @RequestParam(value = "logout", required = false) String logout) {
+        if (error != null){
+            model.addAttribute("error", "Invalid login or password");
+        }
+        if (logout != null){
+            model.addAttribute("logout", "Logout was successful");
+        }
+        return "login";
     }
 
     @RequestMapping(value = "/addperson")
@@ -112,6 +126,29 @@ public class PersonController{
         List<Role> rolesList = Arrays.asList(Role.values());
         model.addAttribute("rolesList", rolesList);
         return "personAdd";
+    }
+
+    @RequestMapping(value="/default")
+    public String loginRedirect(HttpServletRequest request){
+        if (SecurityContextHolder.getContext().getAuthentication()
+                .getAuthorities().contains(new SimpleGrantedAuthority("ADMIN"))){
+            return "redirect:/menu";
+        }
+        return "redirect:/persons";
+    }
+
+    @RequestMapping(value="/menu")
+    public String menu(){
+        return "index";
+    }
+
+    @RequestMapping(value = "/logout")
+    public String logout(HttpServletRequest request, HttpServletResponse response){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth != null){
+            new SecurityContextLogoutHandler().logout(request, response, auth);
+        }
+        return "redirect:/login?logout";
     }
 
 }

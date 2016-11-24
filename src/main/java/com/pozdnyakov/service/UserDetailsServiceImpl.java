@@ -6,15 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
@@ -22,29 +19,22 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Autowired
     private PersonService personService;
 
-    public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
+    public User loadUserByUsername(String s) throws UsernameNotFoundException {
         Person p = personService.findByLogin(s);
-        List<GrantedAuthority> authorities = buildUserAuthority(p.getRoles());
-        return buildUserForAuthentication(p, authorities);
+        return new User(p.getLogin(), p.getPassword(), true, true, true, true, getGrantedAuthorities(p));
     }
 
-    private User buildUserForAuthentication(Person person,
-                                              List<GrantedAuthority> authorities) {
-        return new User(person.getLogin(), person.getPassword(), true,
-                 true, true, true, authorities);
+    @Autowired
+    public UserDetailsServiceImpl(PersonService personService) {
+        this.personService = personService;
     }
 
-    private List<GrantedAuthority> buildUserAuthority(Set<Role> userRoles) {
+    private List<GrantedAuthority> getGrantedAuthorities(Person p){
+        List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
 
-        Set<GrantedAuthority> setAuths = new HashSet<GrantedAuthority>();
-
-        // Build person's authorities
-        for (Role userRole : userRoles) {
-            setAuths.add(new SimpleGrantedAuthority(userRole.name()));
+        for(Role role : p.getRoles()){
+            authorities.add(new SimpleGrantedAuthority(role.name()));
         }
-
-        List<GrantedAuthority> result = new ArrayList<GrantedAuthority>(setAuths);
-
-        return result;
+        return authorities;
     }
 }

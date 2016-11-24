@@ -9,15 +9,18 @@
     <title>Login</title>
 </head>
 <body>
-<form:form action="/login">
+<c:if test="${not empty error}"><div>${error}</div></c:if>
+<c:if test="${not empty logout}"><div>${logout}</div></c:if>
+<c:url value='/spring_security_check' var="loginUrl"/>
+<form:form action="${loginUrl}" name="loginForm" method="POST">
     <table>
         <tr>
-            <td><label path="login">Login:</label></td>
-            <td><input type="text" path="login"></td>
+            <td>Login:</td>
+            <td><input type="text" name="j_username" placeholder="Login"></td>
         </tr>
         <tr>
-            <td><label path="password">Password:</label></td>
-            <td><input type="text" path="password" m></td>
+            <td>Password:</td>
+            <td><input type="password" name="j_password" placeholder="Password"></td>
         </tr>
         <tr>
             <td><input type="submit" value="Login"></td>

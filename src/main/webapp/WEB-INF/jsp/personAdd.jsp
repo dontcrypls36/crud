@@ -5,11 +5,13 @@
 <%@ page session="false" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>Add person</title>
+    <link type="text/css" rel="stylesheet" href="<c:url value="/resources/css/style.css"/>"/>
 </head>
 <body>
+<jsp:include page="header.jsp"/>
 <c:url var="addAction" value='/add' />
-
+<div class="body, other">
 <form:form action="${addAction}" modelAttribute="person">
     <table>
         <c:if test="${!empty person.name}">
@@ -53,7 +55,7 @@
         </tr>
     </table>
 </form:form>
-
+</div>
 
 </body>
 </html>

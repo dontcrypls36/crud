@@ -1,13 +1,17 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <%@ page isELIgnored="false" %>
 <%@ page session="false" %>
 <html>
 <head>
     <title>Persons list</title>
+    <link type="text/css" rel="stylesheet" href="<c:url value="/resources/css/style.css"/>"/>
 </head>
 <body>
+<jsp:include page="header.jsp"/>
+<div class="body, other">
 <h3>Search by name</h3>
 <c:url var="searchAction" value='/search/'/>
 <form:form action="${searchAction}" method="get">
@@ -37,11 +41,13 @@
         <th width="120">Create date</th>
         <th width="120">Login</th>
         <th width="120">Roles</th>
-        <th width="60">Edit</th>
-        <th width="60">Delete</th>
+        <sec:authorize access="hasAuthority('ADMIN')">
+            <th width="60">Edit</th>
+            <th width="60">Delete</th>
+        </sec:authorize>
+
     </tr>
     <c:forEach var="person" items="${usersList}">
-        <tr>
             <td>${person.id}</td>
             <td>${person.name}</td>
             <td>${person.age}</td>
@@ -51,8 +57,10 @@
                 ${role},
             </c:forEach>
             </td>
+            <sec:authorize access="hasAuthority('ADMIN')">
             <td><a href="<c:url value='/edit/${person.id}' />" >Edit</a></td>
             <td><a href="<c:url value='/remove/${person.id}' />" >Delete</a></td>
+            </sec:authorize>
         </tr>
     </c:forEach>
 </table>
@@ -67,11 +75,13 @@
 
     <%--</ul>--%>
 <%--</div>--%>
+    <sec:authorize access="hasAuthority('ADMIN')">
 <c:url var="deleteAllAction" value="/deleteAll"/>
 <form:form action="${deleteAllAction}">
     <input type="submit" value="<spring:message text="Delete all"/>" />
 </form:form>
-
+    </sec:authorize>
+</div>
 
 </body>
 </html>
