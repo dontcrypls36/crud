@@ -42,7 +42,7 @@
         </tr>
 
         <tr>
-            <td colspan="2">
+            <td colspan="2" style="text-align: left">
                 <c:if test="${!empty person.name}">
                     <input type="submit"
                            value="<spring:message text="Edit Person"/>" />

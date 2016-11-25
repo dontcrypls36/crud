@@ -27,3 +27,12 @@
     height: 20px;
     background-color: lightgray;
 }
+td{
+    text-align: center;
+}
+.error{
+    color: red;
+}
+.success{
+    color:green;
+}

@@ -7,10 +7,11 @@
 <html>
 <head>
     <title>Login</title>
+    <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/style.css"/>">
 </head>
 <body>
-<c:if test="${not empty error}"><div>${error}</div></c:if>
-<c:if test="${not empty logout}"><div>${logout}</div></c:if>
+<c:if test="${not empty error}"><div class="error">${error}</div></c:if>
+<c:if test="${not empty logout}"><div class="success">${logout}</div></c:if>
 <c:url value='/spring_security_check' var="loginUrl"/>
 <form:form action="${loginUrl}" name="loginForm" method="POST">
     <table>

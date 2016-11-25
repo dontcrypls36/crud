@@ -57,7 +57,7 @@ public class PersonController{
             this.personService.update(p);
         }
 
-        return "index";
+        return "redirect:/persons";
 
     }
 
@@ -65,20 +65,22 @@ public class PersonController{
     public String delete(@PathVariable("id") int id){
 
         this.personService.delete(id);
-        return "personsList";
+        return "redirect:/persons";
     }
 
     @RequestMapping("/edit/{id}")
     public String update(@RequestParam(value = "page", required = false) Long page, @PathVariable("id") int id, Model model){
         model.addAttribute("person", this.personService.getPersonById(id));
         model.addAttribute("usersList", this.personService.read(page == null? 1L : page, PERSONS_ON_PAGE));
+        List<Role> rolesList = Arrays.asList(Role.values());
+        model.addAttribute("rolesList", rolesList);
         return "personAdd";
     }
 
     @RequestMapping("/deleteAll")
     public String deleteAll(){
         this.personService.deleteAll();
-        return "redirect:/";
+        return "redirect:/persons";
     }
 
     @RequestMapping(value = "/search/", method = RequestMethod.GET)

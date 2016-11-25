@@ -4,15 +4,12 @@ import com.pozdnyakov.model.Person;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-/**
- * Created by Artem on 21.02.2016.
- */
 @Repository
 public class PersonDAOImpl implements PersonDAO {
 
@@ -23,51 +20,51 @@ public class PersonDAOImpl implements PersonDAO {
         this.sessionFactory = sessionFactory;
     }
 
+    @Transactional
     public int create(Person p) {
         Session session = sessionFactory.openSession();
-        Transaction tr = session.beginTransaction();
         Integer i = (Integer)session.save(p);
-        tr.commit();
+        session.flush();
         session.close();
         return p.getId();
     }
 
+    @Transactional
     public void deleteAll() {
         Session session = sessionFactory.openSession();
-        session.beginTransaction();
-        Query query = session.createQuery("DELETE FROM Person");
+        Query query = session.createQuery("DELETE FROM Person p where p.id != 99999");
         query.executeUpdate();
-        session.getTransaction().commit();
         session.close();
     }
 
+    @Transactional
     public void delete(int id) {
         Session session = sessionFactory.openSession();
-        Transaction tx = session.beginTransaction();
         Person p = (Person) session.load(Person.class, id);
         session.delete(p);
-        tx.commit();
+        session.flush();
         session.close();
     }
 
+    @Transactional
     public void update(Person e) {
         Session session = sessionFactory.openSession();
-        session.beginTransaction();
-        Person em = (Person) session.get(Person.class, e.getId());
+        Person em = (Person) session.load(Person.class, e.getId());
         em.setName(e.getName());
         em.setAge(e.getAge());
         em.setLogin(e.getLogin());
         em.setPassword(e.getPassword());
         em.setRoles(e.getRoles());
         em.setCreateDate(e.getCreateDate());
-        session.getTransaction().commit();
+        session.flush();
         session.close();
     }
 
+    @Transactional
     public List<Person> read(Long page, int personsOnPage) {
         Session session = sessionFactory.openSession();
         @SuppressWarnings("unchecked")
-        Query q = session.createQuery("FROM Person");
+        Query q = session.createQuery("FROM Person order by id");
         q.setFirstResult((page.intValue() - 1) * personsOnPage);
         q.setMaxResults( personsOnPage);
         List<Person> l = q.list();
@@ -75,12 +72,18 @@ public class PersonDAOImpl implements PersonDAO {
         return l;
     }
 
+    @Transactional
     public Person getPersonById(int id){
-        Session session = sessionFactory.getCurrentSession();
-        Person p = (Person) session.load(Person.class, new Integer(id));
+        Session session = sessionFactory.openSession();
+        Query q = session.createQuery("SELECT u FROM Person u WHERE u.id = :id");
+        q.setParameter("id", id);
+        Person p = (Person) q.list().get(0);
+//        Person p = (Person) session..load(Person.class, id);
+        session.close();
         return p;
     }
 
+    @Transactional
     public List<Person> findByName(String name, Long page, int personsOnPage) {
         Session session = sessionFactory.openSession();
         @SuppressWarnings("unchecked")
@@ -110,10 +113,13 @@ public class PersonDAOImpl implements PersonDAO {
         return count;
     }
 
+    @Transactional
     public Person findByLogin(String name) {
         Session session = sessionFactory.openSession();
         Query q = session.createQuery("FROM Person WHERE login = :login");
         q.setParameter("login", name);
-        return (Person)q.list().get(0);
+        Person p = (Person)q.list().get(0);
+        session.close();
+        return p;
     }
 }
